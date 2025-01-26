@@ -1,0 +1,33 @@
+services:
+  ollama-service:
+    build:
+      context: .
+      dockerfile: Dockerfile.ollama
+    restart: always
+
+  generate-names:
+    build: 
+      context: .
+      dockerfile: Dockerfile.generator
+      platforms: 
+        - linux/arm64
+    command: ./generate-npc $KIND
+
+    environment:
+      - OLLAMA_HOST=http://ollama-service:11434
+      #- OLLAMA_HOST=http://host.docker.internal:11434
+      - LLM_NAME_GENERATION=qwen2.5:1.5b
+      - LLM_SHEET_GENERATION=qwen2.5:1.5b
+      #- LLM=qwen2.5:1.5b
+      #- LLM=qwen2.5:3b
+      #- LLM=nemotron-mini
+      - INSTRUCTIONS_PATH=./instructions
+    volumes:
+      - ./data:/app/data
+    depends_on:
+      ollama-service:
+        condition: service_started
+    develop:
+      watch:
+        - action: rebuild
+          path: ./main.go

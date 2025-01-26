@@ -1,0 +1,16 @@
+{
+  "name": "Frostfire",
+  "kind": "hobbit",
+  "sheet": {
+    "title": "Frostfire, a Hobbit Born with the Power to Control the Tides",
+    "age": "adult",
+    "family": "Frodo Baggins and Samwise Gamgee, both hobbits who were born with the power to control the tides.",
+    "occupation": "a hobbit, known as a dragonlind, with a special bond with their homeland.",
+    "physical_appearance": "a hobbit has a slender build and a long, flowing beard.",
+    "clothing": "a hobbit's robe with a dragon's scales, a cloak of shimmering gold and silver.",
+    "food_preferences": "a hobbit's staple food is salt, often found in their homeland of the Misty Mountains.",
+    "background_story": "a hobbit born with the power to control the tides, a gift he passed on to his father, the king.",
+    "personality_traits": "a hobbit is quick-witted and resourceful, always thinking outside the box.",
+    "quote": "I am not afraid of the sea, for the sea is not afraid of me."
+  }
+}

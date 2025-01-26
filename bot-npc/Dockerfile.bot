@@ -1,0 +1,21 @@
+FROM --platform=$BUILDPLATFORM golang:1.23.4-alpine AS builder
+
+ARG TARGETOS
+ARG TARGETARCH
+
+WORKDIR /app
+COPY go.mod .
+COPY . .
+
+RUN <<EOF
+go mod tidy
+GOOS=${TARGETOS} GOARCH=${TARGETARCH} go build -o bot-npc
+EOF
+
+
+FROM busybox
+#FROM scratch
+WORKDIR /app
+COPY --from=builder /app/bot-npc .
+#COPY instructions /app/instructions
+

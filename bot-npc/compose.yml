@@ -1,0 +1,32 @@
+services:
+
+  ollama-service:
+    build:
+      context: .
+      dockerfile: Dockerfile.ollama
+    restart: always
+  
+  bot-service:
+    build: 
+      context: .
+      dockerfile: Dockerfile.bot
+      platforms: 
+        - linux/arm64    
+    command: ./bot-npc $CHARACTER_DATA
+    environment:
+      - OLLAMA_HOST=http://ollama-service:11434
+      #- LLM_CHAT=qwen2.5:0.5b
+      - LLM_CHAT=qwen2.5:1.5b
+      - "ADDITIONAL_NPC_DATA=Magic keyword: yolo"
+    ports:
+      - 5051:8080
+    volumes:
+      - ./data:/app/data
+    depends_on:
+      ollama-service:
+        condition: service_started
+    develop:
+      watch:
+        - action: rebuild
+          path: ./main.go
+

@@ -1,0 +1,12 @@
+go 1.23.4
+
+use (
+
+	dev/01-generate-npc
+	dev/02-generate-npc
+	dev/03-bot-with-rag
+	dev/04-bot-npc
+
+	generate-npc
+	bot-npc
+)
