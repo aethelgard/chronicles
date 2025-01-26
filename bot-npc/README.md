@@ -1,8 +1,8 @@
-# Bot NPC + RAG
-> Retrieval Augmented Generation
+# Bot NPC 
 
 ```bash
-docker compose up
+CHARACTER_DATA=./data/character-dragon-lorinirion.json  docker-compose up 
 # or
-docker compose up --build
+CHARACTER_DATA=./data/character-dragon-lorinirion.json  docker-compose up 
+ --build
 ```
