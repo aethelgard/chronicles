@@ -6,3 +6,7 @@ CHARACTER_DATA=./data/character-dragon-lorinirion.json  docker-compose up
 CHARACTER_DATA=./data/character-dragon-lorinirion.json  docker-compose up 
  --build
 ```
+
+```bash
+docker-compose --file ./compose-bots.yml up
+```

@@ -1,9 +1,18 @@
 #!/bin/bash 
-SERVICE_URL_DRAGON="http://localhost:5051"
-SERVICE_URL_HOBBIT="http://localhost:5052"
-SERVICE_URL_WEREWOLF="http://localhost:5053"
-SERVICE_URL_DWARF="http://localhost:5054"
 
+: <<'COMMENT'
+This script sends a question to all the bot services in the list.
+Pre-requisite: All the bot services should be running:
+```bash
+docker-compose --file ./compose-bots.yml up
+```
+COMMENT
+
+
+SERVICES[1]="http://localhost:5051"
+SERVICES[2]="http://localhost:5052"
+SERVICES[3]="http://localhost:5053"
+SERVICES[4]="http://localhost:5054"
 
 read -r -d '' DATA <<- EOM
 {
@@ -11,38 +20,16 @@ read -r -d '' DATA <<- EOM
 }
 EOM
 
-echo ""
-echo "Sending question: ${DATA} on ${SERVICE_URL_DRAGON}"
-echo ""
 
-curl --no-buffer ${SERVICE_URL_DRAGON}/api/chat \
+for key in "${!SERVICES[@]}"; do
+    echo ""
+    echo "${key}- Sending question: ${DATA} on ${SERVICES[$key]}"
+    echo ""
+
+    curl --no-buffer ${SERVICES[$key]}/api/chat \
     -H "Content-Type: application/json" \
     -d "${DATA}" 
-echo ""
 
-echo ""
-echo "Sending question: ${DATA} on ${SERVICE_URL_HOBBIT}"
-echo ""
+    echo ""
+done
 
-curl --no-buffer ${SERVICE_URL_HOBBIT}/api/chat \
-    -H "Content-Type: application/json" \
-    -d "${DATA}" 
-echo ""
-
-echo ""
-echo "Sending question: ${DATA} on ${SERVICE_URL_WEREWOLF}"
-echo ""
-
-curl --no-buffer ${SERVICE_URL_WEREWOLF}/api/chat \
-    -H "Content-Type: application/json" \
-    -d "${DATA}" 
-echo ""
-
-echo ""
-echo "Sending question: ${DATA} on ${SERVICE_URL_DWARF}"
-echo ""
-
-curl --no-buffer ${SERVICE_URL_DWARF}/api/chat \
-    -H "Content-Type: application/json" \
-    -d "${DATA}" 
-echo ""
